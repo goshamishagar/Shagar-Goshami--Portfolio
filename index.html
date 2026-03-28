@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHAGAR GOSHAMI | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --primary: #0f172a; 
+            --accent: #2563eb;  
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --nav-bg: rgba(255, 255, 255, 0.8);
+            --contact-bg: #0f172a;
+            --contact-text: #f8fafc;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.dark-mode {
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --primary: #f8fafc;
+            --accent: #60a5fa;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --nav-bg: rgba(15, 23, 42, 0.9);
+            --contact-bg: #1e293b;
+            --contact-text: #f1f5f9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-body); 
+            color: var(--text-main); 
+            line-height: 1.7; 
+            scroll-behavior: smooth;
+            transition: var(--transition);
+        }
+
+        .welcome-bar {
+            background: var(--primary);
+            color: var(--bg-body);
+            text-align: center;
+            padding: 12px 0;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        nav {
+            position: sticky; top: 0; width: 100%; height: 70px;
+            background: var(--nav-bg); backdrop-filter: blur(10px);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 10%; z-index: 1000; border-bottom: 1px solid var(--border);
+        }
+        .logo { font-weight: 800; font-size: 1.1rem; color: var(--accent); }
+        .nav-right { display: flex; align-items: center; gap: 30px; }
+        .nav-links { list-style: none; display: flex; gap: 20px; }
+        .nav-links a { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); text-decoration: none; }
+        .nav-links a:hover { color: var(--accent); }
+
+        #theme-toggle {
+            background: var(--accent); color: white; border: none; padding: 8px 16px; border-radius: 6px;
+            cursor: pointer; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; transition: var(--transition);
+        }
+
+        #hero { padding: 120px 10% 80px; text-align: center; background: radial-gradient(circle at top right, var(--border), transparent); }
+        #hero h1 { font-size: 4rem; font-weight: 800; color: var(--primary); margin-bottom: 25px; letter-spacing: -2px; line-height: 1.1; }
+        #hero p { max-width: 700px; margin: 0 auto 40px; color: var(--text-muted); font-size: 1.1rem; }
+        
+        .btn { padding: 14px 35px; border-radius: 4px; font-weight: 700; text-decoration: none; display: inline-block; font-size: 0.9rem; transition: 0.3s; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-primary:hover { transform: translateY(-3px); opacity: 0.9; }
+
+        section { padding: 80px 10%; }
+        .section-title { font-size: 2rem; font-weight: 800; margin-bottom: 50px; color: var(--primary); letter-spacing: -1px; }
+
+        /* --- Insights Gallery --- */
+        .insights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .insight-card { background: var(--bg-card); border-radius: 16px; overflow: hidden; border: 1px solid var(--border); transition: var(--transition); }
+        .insight-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1); }
+        .insight-img { width: 100%; height: 200px; background: #e2e8f0; display: flex; align-items: center; justify-content: center; color: var(--text-muted); position: relative; }
+        .dark-mode .insight-img { background: #1e293b; }
+        .insight-content { padding: 25px; }
+        .insight-tag { font-size: 0.7rem; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: block; }
+        .insight-content h4 { font-size: 1.1rem; margin-bottom: 8px; color: var(--primary); }
+        .insight-content p { font-size: 0.85rem; color: var(--text-muted); }
+
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .skill-item { background: var(--bg-card); padding: 30px; border-radius: 12px; border: 1px solid var(--border); transition: var(--transition); display: flex; flex-direction: column; gap: 15px; }
+        .icon-box { background: #eff6ff; color: var(--accent); width: 45px; height: 45px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+        .dark-mode .icon-box { background: #1e293b; }
+
+        #contact-container { padding: 80px 10%; }
+        #contact { background: var(--contact-bg); color: var(--contact-text); text-align: center; padding: 80px 40px; border-radius: 24px; transition: var(--transition); border: 1px solid var(--border); box-shadow: 0 20px 40px -15px rgba(0,0,0,0.2); }
+        #contact h2 { color: var(--contact-text); font-size: 2.5rem; margin-bottom: 15px; }
+        .contact-links { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 40px; }
+        .contact-link-item { color: var(--contact-text); text-decoration: none; font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; gap: 10px; padding: 12px 24px; border-radius: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.3s; }
+        .contact-link-item:hover { background: var(--accent); transform: translateY(-3px); }
+
+        footer { text-align: center; padding: 40px; font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
+
+        @media (max-width: 768px) {
+            #hero h1 { font-size: 2.8rem; }
+            .nav-links { display: none; }
+            section, #contact-container { padding: 60px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="welcome-bar">SHAGAR GOSHAMI</div>
+
+    <nav>
+        <div class="logo">OPERATIONS.DEV</div>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#insights">Insights</a></li>
+                <li><a href="#contact-container">Contact</a></li>
+            </ul>
+            <button id="theme-toggle">Dark Mode</button>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <h1>Turning Raw Data into<br>Strategic Growth.</h1>
+        <p>MIS Specialist & Data Analytics Lead focused on Sales Operations and SFA Optimization.</p>
+        <a href="#contact-container" class="btn btn-primary">Start a Conversation</a>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">Technical Ecosystem</h2>
+        <div class="skills-grid">
+            <div class="skill-item">
+                <div class="icon-box"><i data-lucide="layout-dashboard"></i></div>
+                <h4>Power BI</h4>
+                <p>Advanced KPI dashboard development and sales visualization.</p>
+            </div>
+            <div class="skill-item">
+                <div class="icon-box"><i data-lucide="file-spreadsheet"></i></div>
+                <h4>Advanced Excel</h4>
+                <p>Complex data modeling and automation templates.</p>
+            </div>
+            <div class="skill-item">
+                <div class="icon-box"><i data-lucide="smartphone"></i></div>
+                <h4>SFA & DMS</h4>
+                <p>Sales Force Automation and Distributor System administration.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="insights" style="background: var(--bg-body);">
+        <h2 class="section-title">Field Insights & Market Presence</h2>
+        <div class="insights-grid">
+            <div class="insight-card">
+                <div class="insight-img">
+                    <i data-lucide="map-pin" size="48" style="opacity: 0.2;"></i>
+                    </div>
+                <div class="insight-content">
+                    <span class="insight-tag">Operational Audit</span>
+                    <h4>Distributor Compliance</h4>
+                    <p>Conducting on-site audits to ensure 100% adherence to onboarding and documentation protocols.</p>
+                </div>
+            </div>
+            <div class="insight-card">
+                <div class="insight-img">
+                    <i data-lucide="clipboard-check" size="48" style="opacity: 0.2;"></i>
+                </div>
+                <div class="insight-content">
+                    <span class="insight-tag">Market Visit</span>
+                    <h4>Field Intelligence</h4>
+                    <p>Gathering qualitative feedback from field sales teams to optimize SFA reporting accuracy.</p>
+                </div>
+            </div>
+            <div class="insight-card">
+                <div class="insight-img">
+                    <i data-lucide="users" size="48" style="opacity: 0.2;"></i>
+                </div>
+                <div class="insight-content">
+                    <span class="insight-tag">Strategy</span>
+                    <h4>Regional Performance</h4>
+                    <p>Collaborating with regional managers to translate dashboard insights into field-level action plans.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="contact-container">
+        <div id="contact">
+            <h2>Let's build something efficient.</h2>
+            <p>I am currently open to new opportunities in MIS and Sales Operations.</p>
+            <div class="contact-links">
+                <a href="mailto:shagorgoshami@gmail.com" class="contact-link-item">
+                    <i data-lucide="mail"></i> shagorgoshami@gmail.com
+                </a>
+                <a href="https://linkedin.com/in/shagar-goshami" target="_blank" class="contact-link-item">
+                    <i data-lucide="linkedin"></i> LinkedIn
+                </a>
+                <div class="contact-link-item">
+                    <i data-lucide="phone"></i> 01875729353
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Shagar Goshami &bull; Operations & Data Specialist
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        const btn = document.getElementById('theme-toggle');
+        const body = document.body;
+        if (localStorage.getItem('theme') === 'dark') {
+            body.classList.add('dark-mode');
+            btn.textContent = 'Day Mode';
+        }
+        btn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            let theme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+            btn.textContent = theme === 'dark' ? 'Day Mode' : 'Dark Mode';
+            localStorage.setItem('theme', theme);
+        });
+    </script>
+</body>
+</html>
